@@ -32,7 +32,6 @@
 <script>
   import theme from '@/assets/js/common/theme'
 
-
   // 主题皮肤名称数组
   const themes = [
     'light',
