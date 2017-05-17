@@ -15,8 +15,14 @@ import Register from '@/components/common/register'
 // 个人中心 
 import Person from '@/components/person/index'
 
-
-
+Router.prototype.back = function(){
+  this.isBack = true
+  this.go(-1)
+}
+Router.prototype.next = function(...arg){
+  this.isBack = false
+  this.push(...arg)
+}
 
 Vue.use(Router)
 
