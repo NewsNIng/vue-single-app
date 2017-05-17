@@ -15,11 +15,15 @@ import Register from '@/components/common/register'
 // 个人中心 
 import Person from '@/components/person/index'
 
-Router.prototype.back = function(){
+
+// 主页
+import Home from '@/components/home/index'
+
+Router.prototype.back = function () {
   this.isBack = true
   this.go(-1)
 }
-Router.prototype.next = function(...arg){
+Router.prototype.next = function (...arg) {
   this.isBack = false
   this.push(...arg)
 }
@@ -29,7 +33,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path:'*',redirect:'/main'
+      path: '*', redirect: '/main'
     },
     // 登录页面
     {
@@ -54,10 +58,19 @@ export default new Router({
       name: 'main',
       component: Main,
       children: [{
-          path: '/',
-          name: 'person',
-          component: Person,
-        }
+        path: '/',
+        name: 'home',
+        component: Home,
+      },
+      {
+        path: '/home',
+        name: 'home',
+        component: Home,
+      }, {
+        path: '/person',
+        name: 'person',
+        component: Person,
+      },
 
       ]
     }
