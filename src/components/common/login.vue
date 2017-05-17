@@ -20,7 +20,7 @@
                <mu-flat-button label="忘记密码" class="demo-flat-button" />
             </mu-flexbox-item>
             <mu-flexbox-item>
-                <mu-flat-button label="注册" class="demo-flat-button" primary/>
+                <mu-flat-button label="注册" class="demo-flat-button" primary @click='goRegister'/>
             </mu-flexbox-item>
         </mu-flexbox>
     </div>
@@ -40,6 +40,9 @@ export default {
         },
         onBackClick(){
             this.$router.back()
+        },
+        goRegister(){
+            this.$router.next('register')
         }
     }
 }

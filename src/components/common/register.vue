@@ -39,7 +39,7 @@
         this.$router.back()
       },
       gotoLogin(){
-          this.$router.replace('login')
+          this.$router.next('login')
       }
     }
   }
