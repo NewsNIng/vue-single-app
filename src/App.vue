@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition :name="transitionName">
-      <router-view></router-view>
+      <router-view class="child-view"></router-view>
     </transition>
   </div>
 </template>
@@ -17,11 +17,17 @@
 
 
     watch: {
-      '$route' (to, from) {
-        const toDepth = to.path.split('/').length
-        const fromDepth = from.path.split('/').length
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-        
+      '$route' (to, from, next) {
+        let isBack = this.$router.isBack
+        if(isBack === undefined){
+          const toDepth = to.path.split('/').length
+          const fromDepth = from.path.split('/').length
+          // if(toDepth < fromDepth || (toDepth === fromDepth && to.path.length ) )
+          this.transitionName = toDepth < fromDepth  ? 'slide-right' : 'slide-left'
+        }else{
+          this.transitionName = isBack  ? 'slide-right' : 'slide-left'
+        }
+        this.$router.isBack = false
       }
     },
   }
@@ -29,8 +35,25 @@
 </script>
 
 <style scoped>
-  .slide-left-enter-active{
-    transform: translateX(100%)
-}
+  .child-view {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all .33s cubic-bezier(.55, 0, .1, 1);
+  }
+
+  .slide-left-enter,
+  .slide-right-leave-active {
+    opacity: 0;
+    -webkit-transform: translate(33%, 0);
+    transform: translate(33%, 0);
+  }
+
+  .slide-left-leave-active,
+  .slide-right-enter {
+    opacity: 0;
+    -webkit-transform: translate(-33%, 0);
+    transform: translate(-33%, 0);
+  }
 
 </style>
