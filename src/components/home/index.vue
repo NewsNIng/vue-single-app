@@ -1,8 +1,6 @@
 <template>
   <div class="infinite-container">
     <mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh" />
-    <mu-list>
-  
       <template v-for='o,i of num'>
   
         <mu-card>
@@ -22,8 +20,6 @@
         <mu-divider/>
   
       </template>
-  
-    </mu-list>
     <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />
   </div>
 </template>
@@ -45,7 +41,6 @@ export default {
   },
   methods: {
     onTap(o, i) {
-      alert(123)
       this.$router.next('detail')
     },
 
@@ -54,7 +49,7 @@ export default {
       setTimeout(() => {
         this.num += 10
         this.loading = false
-      }, 2000)
+      }, 1000)
     },
     refresh() {
       this.refreshing = true
@@ -62,7 +57,7 @@ export default {
 
         this.num += 10
         this.refreshing = false
-      }, 2000)
+      }, 500)
     }
   }
 }
@@ -75,7 +70,6 @@ export default {
   height: calc(100% - 56px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid #d9d9d9;
   position: relative;
   user-select: none;
 }

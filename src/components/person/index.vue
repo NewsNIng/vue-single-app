@@ -66,7 +66,7 @@
     methods: {
       // 注销
       onLogout() {
-
+        this.$router.next('login')
       },
       // 换肤按钮
       onThemeClick() {

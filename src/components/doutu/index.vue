@@ -1,23 +1,87 @@
 <template>
   <div class="infinite-container">
     <mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh" />
-    <waterfall :align="align" :line-gap="200" :min-line-gap="100" :max-line-gap="220" :single-max-width="300" :watch="items"
-      @reflowed="reflowed" ref="waterfall">
-      <!-- each component is wrapped by a waterfall slot -->
-      <waterfall-slot v-for="(item, index) in items" :width="item.width" :height="item.height" :order="index" :key="item.index"
-        move-class="item-move">
-        <div class="item" :style="item.style" :index="item.index"  v-preview="item.imgsrc">
-          
-        </div>
-      </waterfall-slot>
-    </waterfall>
-    <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />
+      
+      <waterfall :align="align" :line-gap="200" :min-line-gap="100" :max-line-gap="220" :single-max-width="300" :watch="items"
+        @reflowed="reflowed" ref="waterfall">
+        
+        <waterfall-slot v-for="(item, index) in items" :width="item.width" :height="item.height" :order="index" :key="item.index"
+          move-class="item-move">
+
+          <div class="item" :style="item.style" :index="item.index" v-preview="item.imgsrc">
+          </div>
+
+        </waterfall-slot>
+
+      </waterfall>
+
+    <!--<mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />-->
   </div>
 </template>
 
 <script>
-  const imgs = ["http://www.bqxia.com//static/upload/emoji/1493173331185.jpg", "http://www.bqxia.com//static/upload/emoji/1493173307448.jpg", "http://www.bqxia.com//static/upload/emoji/1492744411887.jpg", "http://www.bqxia.com//static/upload/emoji/1492744179721.jpg", "http://www.bqxia.com//static/upload/emoji/1492672556706.jpg", "http://www.bqxia.com//static/upload/emoji/1492672539955.jpg", "http://www.bqxia.com//static/upload/emoji/1492671180700.jpg", "http://www.bqxia.com//static/upload/emoji/1492655307152.png", "http://www.bqxia.com//static/upload/emoji/1492655281127.jpg", "http://www.bqxia.com//static/upload/emoji/1492653041355.jpg", "http://www.bqxia.com//static/upload/emoji/1492570752984.jpg", "http://www.bqxia.com//static/upload/emoji/1492569781800.jpg", "http://www.bqxia.com//static/upload/emoji/1492569611000.jpg", "http://www.bqxia.com//static/upload/emoji/1492567102925.jpg", "http://www.bqxia.com//static/upload/emoji/1492478768411.jpg", "http://www.bqxia.com//static/upload/emoji/1492414173858.jpg", "http://www.bqxia.com//static/upload/emoji/1492413984921.jpg", "http://www.bqxia.com//static/upload/emoji/1492163292132.jpg", "http://www.bqxia.com//static/upload/emoji/1492154946016.jpg", "http://www.bqxia.com//static/upload/emoji/1492154923029.jpg", "http://www.bqxia.com//static/upload/emoji/1492140023987.jpg", "http://www.bqxia.com//static/upload/emoji/1491890269920.jpg", "http://www.bqxia.com//static/upload/emoji/1491889657808.png", "http://www.bqxia.com//static/upload/emoji/1491817484162.jpg", "http://www.bqxia.com//static/upload/emoji/1491812444666.jpg", "http://www.bqxia.com//static/upload/emoji/1491809966207.jpg", "http://www.bqxia.com//static/upload/emoji/1491809034329.jpg", "http://www.bqxia.com//static/upload/emoji/1491548364383.jpg", "http://www.bqxia.com//static/upload/emoji/1491535365868.jpg", "http://www.bqxia.com//static/upload/emoji/1490858481389.jpg", "http://www.bqxia.com//static/upload/emoji/1485069135602.jpg", "http://www.bqxia.com//static/upload/emoji/1485069106611.jpg", "http://www.bqxia.com//static/upload/emoji/1485069076744.jpg", "http://www.bqxia.com//static/upload/emoji/1485068951486.jpg", "http://www.bqxia.com//static/upload/emoji/1485068637217.jpg", "http://www.bqxia.com//static/upload/emoji/1485068593720.jpg", "http://www.bqxia.com//static/upload/emoji/1485068578382.jpg", "http://www.bqxia.com//static/upload/emoji/1485068562797.jpg", "http://www.bqxia.com//static/upload/emoji/1485068550986.jpg", "http://www.bqxia.com//static/upload/emoji/1485068526053.jpg", "http://www.bqxia.com//static/upload/emoji/1485068487319.jpg", "http://www.bqxia.com//static/upload/emoji/1485068451848.jpg", "http://www.bqxia.com//static/upload/emoji/1485068430376.png", "http://www.bqxia.com//static/upload/emoji/1485068380805.jpg", "http://www.bqxia.com//static/upload/emoji/1484718515378.jpg", "http://www.bqxia.com//static/upload/emoji/1484706620789.jpg", "http://www.bqxia.com//static/upload/emoji/1484705298616.jpg", "http://www.bqxia.com//static/upload/emoji/1484705265638.jpg", "http://www.bqxia.com//static/upload/emoji/1484705057007.jpg", "http://www.bqxia.com//static/upload/emoji/1484705032302.jpg", "http://www.bqxia.com//static/upload/emoji/1484705018264.jpg", "http://www.bqxia.com//static/upload/emoji/1484645164697.jpg", "http://www.bqxia.com//static/upload/emoji/1484640246469.jpg", "http://www.bqxia.com//static/upload/emoji/1484638366652.jpg", "http://www.bqxia.com//static/upload/emoji/1484558238505.jpg", "http://www.bqxia.com//static/upload/emoji/1484552650995.jpg", "http://www.bqxia.com//static/upload/emoji/1484296469046.jpg", "http://www.bqxia.com//static/upload/emoji/1484296448395.jpg", "http://www.bqxia.com//static/upload/emoji/1484296419489.jpg", "http://www.bqxia.com//static/upload/emoji/1484214176565.jpg"],
-  imgsLen = imgs.length
+  const imgs = ["http://www.bqxia.com//static/upload/emoji/1493173331185.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1493173307448.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492744411887.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492744179721.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492672556706.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492672539955.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492671180700.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492655307152.png",
+      "http://www.bqxia.com//static/upload/emoji/1492655281127.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492653041355.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492570752984.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492569781800.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492569611000.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492567102925.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492478768411.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492414173858.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492413984921.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492163292132.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492154946016.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492154923029.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1492140023987.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491890269920.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491889657808.png",
+      "http://www.bqxia.com//static/upload/emoji/1491817484162.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491812444666.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491809966207.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491809034329.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491548364383.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1491535365868.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1490858481389.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485069135602.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485069106611.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485069076744.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068951486.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068637217.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068593720.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068578382.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068562797.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068550986.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068526053.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068487319.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068451848.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1485068430376.png",
+      "http://www.bqxia.com//static/upload/emoji/1485068380805.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484718515378.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484706620789.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484705298616.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484705265638.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484705057007.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484705032302.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484705018264.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484645164697.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484640246469.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484638366652.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484558238505.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484552650995.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484296469046.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484296448395.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484296419489.jpg",
+      "http://www.bqxia.com//static/upload/emoji/1484214176565.jpg"
+    ],
+    imgsLen = imgs.length
 
 
 
@@ -70,7 +134,7 @@
 
       return {
         align: 'center',
-        items: ItemFactory.get(20),
+        items: ItemFactory.get(300),
         isBusy: false,
 
         num: 10,
@@ -90,14 +154,14 @@
         setTimeout(() => {
           this.addItems()
           this.loading = false
-        }, 2000)
+        }, 1000)
       },
       refresh() {
         this.refreshing = true
         setTimeout(() => {
           this.shuffle()
           this.refreshing = false
-        }, 2000)
+        }, 500)
       },
       addItems: function () {
         if (!this.isBusy) {
@@ -129,7 +193,6 @@
     height: calc(100% - 56px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1px solid #d9d9d9;
     position: relative;
     user-select: none;
   }
@@ -159,15 +222,18 @@
     background-size: 88%;
     background-position: center center;
   }
-  .item>.imgroom{
+
+  .item>.imgroom {
     text-align: center;
     margin: 0 auto;
   }
-  .item>.imgroom>img{
+
+  .item>.imgroom>img {
     max-width: 100%;
     min-width: 50%;
   }
-  .item>.title{
+
+  .item>.title {
     /*position: absolute;
     left: 10px;
     bottom: 10px;*/
@@ -191,5 +257,6 @@
   .wf-enter {
     opacity: 0;
   }
+
 
 </style>
