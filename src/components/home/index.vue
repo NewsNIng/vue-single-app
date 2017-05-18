@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     onTap(o, i) {
-      alert(123)
       this.$router.next('detail')
     },
 
