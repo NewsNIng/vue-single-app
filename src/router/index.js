@@ -23,6 +23,7 @@ import Detail from '@/components/home/detail'
 // 斗图
 import Doutu from '@/components/doutu/index'
 
+
 Router.prototype.back = function () {
   this.isBack = true
   this.go(-1)
@@ -35,6 +36,9 @@ Router.prototype.next = function (...arg) {
 Vue.use(Router)
 
 export default new Router({
+  history: true,
+  saveScrollPosition: true,
+  abstract: true,
   routes: [
     {
       path: '*', redirect: '/main'
@@ -57,7 +61,7 @@ export default new Router({
       name: 'detail',
       component: Detail
     },
-    
+
     {
       path: '/',
       name: 'main',
@@ -79,7 +83,7 @@ export default new Router({
         name: 'person',
         component: Person,
       },
-       {
+      {
         // 斗图中心 
         path: '/doutu',
         name: 'doutu',
