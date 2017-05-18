@@ -18,6 +18,8 @@ import Person from '@/components/person/index'
 
 // 主页
 import Home from '@/components/home/index'
+// 详情
+import Detail from '@/components/home/detail'
 // 斗图
 import Doutu from '@/components/doutu/index'
 
@@ -48,6 +50,12 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    // 详情
+    {
+      path: '/detail',
+      name: 'detail',
+      component: Detail
     },
     
     {
