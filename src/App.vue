@@ -3,6 +3,7 @@
     <transition :name="transitionName">
       <router-view class="child-view"></router-view>
     </transition>
+    <lg-preview></lg-preview>
   </div>
 </template>
 

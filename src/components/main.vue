@@ -9,7 +9,7 @@
         <mu-paper>
             <mu-bottom-nav :value="activeTab" @change="onChange" class="tabs">
                 <mu-bottom-nav-item to="home" value="home" title="主页" icon="home" />
-                <mu-bottom-nav-item to="register" value="register" title="register" icon="favorite" />
+                <mu-bottom-nav-item to="doutu" value="doutu" title="斗图" icon="image" />
                 <mu-bottom-nav-item to="person" value="person" title="我的" icon="person" />
             </mu-bottom-nav>
         </mu-paper>

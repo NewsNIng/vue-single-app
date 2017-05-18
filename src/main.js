@@ -19,6 +19,12 @@ import theme from '@/assets/js/common/theme'
 theme.loadTheme() 
 
 
+// 引用图片预览插件
+import vuePicturePreview from 'vue-picture-preview'
+Vue.use(vuePicturePreview)
+
+
+
 Vue.config.productionTip = false
 
 

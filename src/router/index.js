@@ -18,6 +18,8 @@ import Person from '@/components/person/index'
 
 // 主页
 import Home from '@/components/home/index'
+// 斗图
+import Doutu from '@/components/doutu/index'
 
 Router.prototype.back = function () {
   this.isBack = true
@@ -47,29 +49,33 @@ export default new Router({
       name: 'register',
       component: Register
     },
-    // 个人中心 
-    {
-      path: '/person',
-      name: 'person',
-      component: Person
-    },
+    
     {
       path: '/',
       name: 'main',
       component: Main,
       children: [{
+        // 默认进入 主页
         path: '/',
         name: 'home',
         component: Home,
       },
       {
+        // 主页
         path: '/home',
         name: 'home',
         component: Home,
       }, {
+        // 个人中心 
         path: '/person',
         name: 'person',
         component: Person,
+      },
+       {
+        // 斗图中心 
+        path: '/doutu',
+        name: 'doutu',
+        component: Doutu,
       },
 
       ]
