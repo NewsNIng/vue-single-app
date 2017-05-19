@@ -1,10 +1,8 @@
 <template>
     <div>
-        
-        <router-view>
-    
-        </router-view>
-    
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     
         <mu-paper>
             <mu-bottom-nav :value="activeTab" @change="onChange" class="tabs">
@@ -44,7 +42,6 @@ export default {
     left: 0;
     bottom: 0;
 }
-
 </style>
 
 

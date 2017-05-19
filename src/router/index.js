@@ -18,8 +18,11 @@ import Person from '@/components/person/index'
 
 // 主页
 import Home from '@/components/home/index'
+// 详情
+import Detail from '@/components/home/detail'
 // 斗图
 import Doutu from '@/components/doutu/index'
+
 
 Router.prototype.back = function () {
   this.isBack = true
@@ -33,6 +36,9 @@ Router.prototype.next = function (...arg) {
 Vue.use(Router)
 
 export default new Router({
+  history: true,
+  saveScrollPosition: true,
+  abstract: true,
   routes: [
     {
       path: '*', redirect: '/main'
@@ -49,7 +55,13 @@ export default new Router({
       name: 'register',
       component: Register
     },
-    
+    // 详情
+    {
+      path: '/detail',
+      name: 'detail',
+      component: Detail
+    },
+
     {
       path: '/',
       name: 'main',
@@ -71,7 +83,7 @@ export default new Router({
         name: 'person',
         component: Person,
       },
-       {
+      {
         // 斗图中心 
         path: '/doutu',
         name: 'doutu',
