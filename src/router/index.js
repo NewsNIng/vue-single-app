@@ -32,6 +32,10 @@ Router.prototype.next = function (...arg) {
   this.isBack = false
   this.push(...arg)
 }
+Router.prototype.goto = function(rt, isBack = false){
+  this.isBack = isBack
+  this.push(rt)
+}
 
 Vue.use(Router)
 
