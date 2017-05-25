@@ -15,7 +15,7 @@
 
       </waterfall>
 
-    <!--<mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />-->
+    <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />
   </div>
 </template>
 
@@ -134,7 +134,7 @@
 
       return {
         align: 'center',
-        items: ItemFactory.get(300),
+        items: ItemFactory.get(20),
         isBusy: false,
 
         num: 10,

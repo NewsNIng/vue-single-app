@@ -18,6 +18,8 @@ import Person from '@/components/person/index'
 
 // 主页
 import Home from '@/components/home/index'
+// 发布动态
+import Release from '@/components/home/release'
 // 详情
 import Detail from '@/components/home/detail'
 // 斗图
@@ -64,6 +66,12 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: Detail
+    },
+    // 发布动态
+    {
+      path: '/release',
+      name: 'release',
+      component: Release
     },
 
     {
