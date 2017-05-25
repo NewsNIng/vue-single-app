@@ -6,6 +6,9 @@
       </keep-alive>
 
     </transition>
+
+    <radius></radius>  
+
     <mu-paper>
       <mu-bottom-nav :value="activeTab" @change="onChange" class="tabs">
         <template v-for='o,i of items'>
@@ -18,6 +21,8 @@
 </template>
 
 <script>
+  import Radius from '@/components/common/radius.vue'
+
   export default {
     data() {
       const activeNames = ['home', 'doutu', 'person'],
@@ -74,6 +79,9 @@
         
       this.activeTab = name
       this.active = wantIndex
+    },
+    components: {
+      Radius
     }
   }
 
@@ -98,7 +106,10 @@
     opacity: .2;
     -webkit-transform: translate3d(80%, 0, 0);
     transform: translate3d(80%, 0, 0);
+    
   }
+
+
 
   .slide-left-leave-active,
   .slide-right-enter {
@@ -106,5 +117,9 @@
     -webkit-transform: translate3d(-80%, 0, 0);
     transform: translate3d(-80%, 0, 0);
   }
+
+
+
+  
 
 </style>
