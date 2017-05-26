@@ -28,10 +28,18 @@ Vue.use(vuePicturePreview)
 Vue.config.productionTip = false
 
 
-/* eslint-disable no-new */
+
+// 引入store
+import store from './store'
+
+import api from './api'
+
+
+
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

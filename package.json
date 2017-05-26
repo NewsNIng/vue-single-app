@@ -14,11 +14,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "muse-ui": "^2.0.2",
     "vue": "^2.2.6",
     "vue-picture-preview": "0.0.1",
     "vue-router": "^2.3.1",
-    "vue-waterfall": "^1.0.6"
+    "vue-waterfall": "^1.0.6",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
