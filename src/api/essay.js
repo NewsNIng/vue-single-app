@@ -10,13 +10,22 @@ export default new class Essay {
    * @param {Number} pageNo 页码 
    * @param {Number} pageSize 页量
    */
-  getList(pageNo = 1, pageSize = 10) {
-    return ajax.get('/essay/list', {
+  list(pageNo = 1, pageSize = 10) {
+    console.log(pageNo + '_' + pageSize)
+    return ajax.post('/essay/list', {
       pageNo,
       pageSize
     })
   }
-
+  /**
+   * 发布说说
+   * @param {String} content 内容
+   */
+  release(content){
+    return ajax.post('/essay/release', {
+      content
+    })
+  }
   
 
 }()

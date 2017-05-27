@@ -35,6 +35,10 @@ import store from './store'
 import api from './api'
 
 
+// 引入一些工具
+import appItool from '@/assets/js/common/app.js'
+Vue.prototype.$itool = appItool
+require ('@/assets/js/extends')
 
 new Vue({
   el: '#app',

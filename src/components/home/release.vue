@@ -5,7 +5,7 @@
             <mu-icon-button icon="send" slot="right" @click='onSend'/>
         </mu-appbar>
         <div class="room">
-        <mu-text-field v-model='input' hintText="最多输入100个字符" :errorText="multiLineInputErrorText" @textOverflow="handleMultiLineOverflow" multiLine :rows="5" :rowsMax="8" fullWidth :maxLength="100" />
+        <mu-text-field v-model='input' hintText="最多输入100个字符" :errorText="multiLineInputErrorText" @textOverflow="handleMultiLineOverflow" multiLine :rows="5" :rowsMax="8" fullWidth :maxLength="100" :minLength='1'/>
         </div>
         
         <br/>
@@ -34,10 +34,18 @@ export default {
             this.multiLineInputErrorText = isOverflow ? '超过字符限制啦！！' : ''
         },
         // 发布按钮
-        onSend() {
-            console.log(this.input)
-            this.input = ''
-            this.onBackClick()
+        async onSend() {
+            if(!this.input){
+                return
+            }
+
+            try {
+                let rs = await this.$api.essay.release(this.input)
+                this.input = ''
+                this.onBackClick()
+            } catch (e) {
+                alert(e.errmsg)
+            }
         }
     }
 }
