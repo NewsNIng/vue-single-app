@@ -11,4 +11,7 @@ export default {
     UserLogout({ commit }){
         commit(types.USERLOGOUT)
     },
+    // updateUserInfo(data){
+    //     commit(types.UPDATEUSERINFO, data)
+    // }
 }

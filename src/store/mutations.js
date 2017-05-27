@@ -18,6 +18,7 @@ const mutations = {
         window.localStorage.setItem('userinfo', data)
         state.userinfo = data
     }
+    
 }
 
 export default mutations

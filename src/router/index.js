@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Main from '@/components/main'
 
+import store from '../store'
 
 
 
@@ -41,7 +42,10 @@ Router.prototype.goto = function(rt, isBack = false){
 
 Vue.use(Router)
 
-export default new Router({
+
+
+
+const router = new Router({
   history: true,
   saveScrollPosition: true,
   abstract: true,
@@ -71,7 +75,10 @@ export default new Router({
     {
       path: '/release',
       name: 'release',
-      component: Release
+      component: Release,
+      meta: {
+        requiresAuth: true
+      }
     },
 
     {
@@ -94,6 +101,9 @@ export default new Router({
         path: '/person',
         name: 'person',
         component: Person,
+        meta: {
+          requiresAuth: true
+        }
       },
       {
         // 斗图中心 
@@ -106,3 +116,29 @@ export default new Router({
     }
   ]
 })
+
+
+
+//注册全局钩子用来拦截导航
+router.beforeEach((to, from, next) => {
+  //获取store里面的token
+  let token = store.state.token
+  //判断要去的路由有没有requiresAuth
+  if(to.meta.requiresAuth){
+    if(token){
+      next();
+    }else{
+      next({
+        name: 'login',
+        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      });
+    }
+  }else{
+    next();//如果无需token,那么随它去吧
+  }
+});
+
+
+
+
+export default router
