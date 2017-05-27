@@ -8,7 +8,7 @@ import config from './config'
 //设置全局axios默认值
 axios.defaults.baseURL = config.baseURL
 axios.defaults.timeout = 5000 //5000的超时验证
-axios.defaults.headers.post['Content-Type'] = 'application/json charset=UTF-8'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 //创建一个axios实例
 const instance = axios.create()
@@ -31,7 +31,10 @@ instance.interceptors.request.use(
 //respone拦截器
 instance.interceptors.response.use(
     response => {
-        return response 
+        if(response.data.errno === undefined || response.data.errno !== 0){
+            return  Promise.reject(response.data) 
+        }
+        return response.data 
     },
     error => { //默认除了2XX之外的都是错误的，就会走这里
         if(error.response){

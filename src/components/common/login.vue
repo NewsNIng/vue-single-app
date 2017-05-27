@@ -17,32 +17,63 @@
         </br>
         <mu-flexbox class="footer">
             <mu-flexbox-item>
-               <mu-flat-button label="忘记密码" class="demo-flat-button" />
+                <mu-flat-button label="忘记密码" class="demo-flat-button" />
             </mu-flexbox-item>
             <mu-flexbox-item>
-                <mu-flat-button label="注册" class="demo-flat-button" primary @click='goRegister'/>
+                <mu-flat-button label="注册" class="demo-flat-button" primary @click='goRegister' />
             </mu-flexbox-item>
         </mu-flexbox>
     </div>
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
+
 export default {
-    data(){
+    data() {
         return {
-            telphone: '',
-            password: ''
+            telphone: '17098631995',
+            password: 'abc123'
         }
     },
     methods: {
-        onClick(){
-            
+        ...mapActions([
+            'updateToken'
+        ]),
+        onClick() {
+            this.login()
         },
-        onBackClick(){
+        onBackClick() {
             this.$router.back()
         },
-        goRegister(){
+        goRegister() {
             this.$router.next('register')
+        },
+
+        async login() {
+            try {
+                let rs = await this.$api.user.login(this.telphone, this.password)
+
+                // 保存 信息
+                let { token } = rs.data
+                console.log(token)
+                this.updateToken(token)
+
+                //如果用户手动输入"/"那么会跳转到这里来，即this.$route.query.redirect有参数
+                let redirectUrl = decodeURIComponent(this.$route.query.redirect || '')
+                console.log(redirectUrl)
+                if(!redirectUrl){
+                    this.$router.back()
+                }else{
+                    this.$router.goto(redirectUrl)
+                }
+                
+            } catch (e) {
+                alert(e.errmsg)
+            }
+
+
         }
     }
 }
@@ -53,8 +84,9 @@ export default {
     width: 88%;
     margin: 2rem auto;
 }
-.footer{
-    
-     text-align: center;
+
+.footer {
+
+    text-align: center;
 }
 </style>

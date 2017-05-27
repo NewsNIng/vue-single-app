@@ -43,7 +43,7 @@
     mounted() {
       this.scroller = this.$el
       this.trigger = this.$el
-      this.getUserInfo()
+      this.getEssayList()
       
       // console.log('Token: ' + this.userToken)
     },
@@ -53,10 +53,15 @@
       // })
     },
     methods: {
-      async getUserInfo(){
-        let userinfo = await this.$api.user.login(123,123)
-        console.log(userinfo)
+      async getEssayList(){
+        try {
+          
+        } catch (e) {
+          
+        }
       },
+
+      
 
       onTap(o, i) {
         //this._saveScrollTop()
