@@ -10,7 +10,7 @@ export default {
     getUserInfo: state => {
         let userinfo = state.userinfo
         if(!userinfo){
-            userinfo = window.localStorage.getItem('userinfo')
+            userinfo = JSON.parse(window.localStorage.getItem('userinfo') || '{}')
             state.userinfo = userinfo
         }
         return userinfo

@@ -9,7 +9,7 @@
      <span slot="describe">
         <span>{{_timeAgo(o.essay_time)}}</span>
       </span>
-      <div style="color: rgba(0, 0, 0, .87); margin-top:5px;">{{o.essay_content}}</div>
+      <div style="margin-top:5px;">{{o.essay_content}}</div>
       <!--<mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
         <mu-menu-item title="回复" />
         <mu-menu-item title="标记" />
