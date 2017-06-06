@@ -15,6 +15,8 @@ import Register from '@/components/common/register'
 
 // 个人中心 
 import Person from '@/components/person/index'
+// 个人中心 - 资料
+import PersonMy from '@/components/person/my'
 
 
 // 主页
@@ -24,7 +26,9 @@ import Release from '@/components/home/release'
 // 详情
 import Detail from '@/components/home/detail'
 // 斗图
-import Doutu from '@/components/doutu/index'
+// import Doutu from '@/components/doutu/index'
+// 消息
+import Chat from '@/components/chat/index'
 
 
 Router.prototype.back = function () {
@@ -80,7 +84,15 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
+    // 个人中心 - 我的资料
+    {
+      path: '/my',
+      name: 'my',
+      component: PersonMy,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/',
       name: 'main',
@@ -105,12 +117,18 @@ const router = new Router({
           requiresAuth: true
         }
       },
+      // {
+      //   // 斗图中心 
+      //   path: '/doutu',
+      //   name: 'doutu',
+      //   component: Doutu,
+      // },
       {
-        // 斗图中心 
-        path: '/doutu',
-        name: 'doutu',
-        component: Doutu,
-      },
+        // 聊天 
+        path: '/chat',
+        name: 'chat',
+        component: Chat,
+      }
 
       ]
     }

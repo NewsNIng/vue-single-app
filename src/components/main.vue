@@ -25,7 +25,7 @@
 
   export default {
     data() {
-      const activeNames = ['home', 'doutu', 'person'],
+      const activeNames = ['home', 'chat', 'person'],
         active = 0,
         activeTab = activeNames[active]
 
@@ -41,9 +41,9 @@
           name: 'home',
           icon: 'home'
         }, {
-          title: '斗图',
-          name: 'doutu',
-          icon: 'image'
+          title: '消息',
+          name: 'chat',
+          icon: 'chat'
         }, {
           title: '我的',
           name: 'person',

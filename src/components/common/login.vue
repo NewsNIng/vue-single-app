@@ -39,7 +39,8 @@ export default {
     },
     methods: {
         ...mapActions([
-            'updateToken'
+            'updateToken',
+            'UserLogin'
         ]),
         onClick() {
             this.login()
@@ -56,9 +57,10 @@ export default {
                 let rs = await this.$api.user.login(this.telphone, this.password)
 
                 // 保存 信息
-                let { token } = rs.data
-                console.log(token)
+                let { token,userInfo } = rs.data
+                console.log(rs.data)
                 this.updateToken(token)
+                this.UserLogin(userInfo)
 
                 //如果用户手动输入"/"那么会跳转到这里来，即this.$route.query.redirect有参数
                 let redirectUrl = decodeURIComponent(this.$route.query.redirect || '')

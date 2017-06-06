@@ -15,9 +15,15 @@ const mutations = {
     },
     [types.USERLOGIN]: (state, data) => {
         //把用户数据存到本地
-        window.localStorage.setItem('userinfo', data)
+        window.localStorage.setItem('userinfo', JSON.stringify(data))
         state.userinfo = data
-    }
+    },
+    [types.UPDATEUSERINFO]: (state, data) => {
+        let newData = Object.assign(state.userinfo, data)
+        //把新用户数据存到本地
+        window.localStorage.setItem('userinfo', JSON.stringify(newData))
+        state.userinfo = newData
+    },
     
 }
 

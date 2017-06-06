@@ -2,18 +2,18 @@
   <div>
     <mu-card>
   
-      <!--<mu-card-media :title="userInfo.userName" :subTitle="telPhone">
-        <img src="https://cdn.pixabay.com/photo/2017/04/13/17/48/floor-2228277__340.jpg" />
-      </mu-card-media>-->
+      <mu-card-media :title="userInfo.nickname" :subTitle="telPhone">
+        <img src="https://cdn.pixabay.com/photo/2017/04/13/17/48/floor-2228277__340.jpg" @click='onAvatarClick' />
+      </mu-card-media>
   
     </mu-card>
     <br/>
     <mu-list>
+      <mu-list-item title="修改资料" @click='onInfoClick'>
+        <mu-icon slot="left" value="grade" />
+      </mu-list-item>
       <mu-list-item title="换肤" @click='onThemeClick'>
         <mu-icon slot="left" value="remove_red_eye" />
-      </mu-list-item>
-      <mu-list-item title="Starred">
-        <mu-icon slot="left" value="grade" />
       </mu-list-item>
       <mu-list-item title="Sent mail">
         <mu-icon slot="left" value="send" />
@@ -55,7 +55,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.userInfo)
+    
   },
   computed: {
     ...mapGetters({
@@ -83,6 +83,14 @@ export default {
     onThemeClick() {
       this.themeIndex++
     },
+    // 修改资料
+    onInfoClick(){
+      this.$router.next('my')
+    },
+    // 头像点击
+    onAvatarClick(){
+      alert(123)
+    }
   },
   watch: {
     // 监听主题皮肤
