@@ -64,6 +64,7 @@ export default {
 
     // 隐藏真实手机号
     telPhone() {
+      if(!this.userInfo.telphone){return ''}
       let tel = this.userInfo.telphone.toString().split('')
       tel.splice(3, 4, '*', '*', '*', '*')
       return tel.join('')

@@ -1,27 +1,39 @@
 <template>
+  <!-- <div> -->
+  
   <div class="infinite-container" ref='room'>
+    <section class="activeTab">
+      <mu-tabs :value="activeTab" @change="handleTabChange">
+        <mu-tab title="全部" value="all">
+        </mu-tab>
+        <mu-tab title="最新" value="now">
+        </mu-tab>
+        <mu-tab title="精华" value="hot">
+        </mu-tab>
+      </mu-tabs>
+    </section>
     <mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh" />
     <template v-for='o,i of list'>
   
-
-    <mu-list-item :title="o.user.nickname">
-      <mu-avatar :src="o.user.avatar || _getRandomImgSrc()" slot="leftAvatar" />
-     <span slot="describe">
-        <span>{{_timeAgo(o.essay_time)}}</span>
-      </span>
-      <div style="margin-top:5px;">{{o.essay_content}}</div>
-      <!--<mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
-        <mu-menu-item title="回复" />
-        <mu-menu-item title="标记" />
-        <mu-menu-item title="删除" />
-      </mu-icon-menu>-->
-    </mu-list-item>
-
-       <mu-divider inset/>
+      <mu-list-item :title="o.user.nickname">
+        <mu-avatar :src="o.user.avatar || _getRandomImgSrc()" slot="leftAvatar" />
+        <span slot="describe">
+          <span>{{_timeAgo(o.essay_time)}}</span>
+        </span>
+        <div style="margin-top:5px;">{{o.essay_content}}</div>
+        <!--<mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
+              <mu-menu-item title="回复" />
+              <mu-menu-item title="标记" />
+              <mu-menu-item title="删除" />
+            </mu-icon-menu>-->
+      </mu-list-item>
+  
+      <mu-divider inset/>
   
     </template>
     <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" loadingText='' />
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -32,6 +44,7 @@ import {
 export default {
   data() {
     return {
+      activeTab: 'all',
       scrollTop: 0,
       loading: false,
       scroller: null,
@@ -81,6 +94,10 @@ export default {
       }
     },
 
+    // tab 页 切换
+    handleTabChange(val) {
+      this.activeTab = val
+    },
 
 
     onTap(o, i) {
@@ -105,10 +122,10 @@ export default {
     _resetScrollTop() {
       this.$refs.room.scrollTop = this.scrollTop
     },
-    _getRandomImgSrc(){
+    _getRandomImgSrc() {
       return this.$itool.getRandomImgSrc()
     },
-    _timeAgo(date){
+    _timeAgo(date) {
       return new Date().ago(date)
     }
   },
@@ -141,5 +158,12 @@ export default {
   -webkit-overflow-scrolling: touch;
   position: relative;
   user-select: none;
+  margin-top: 48px;
+}
+
+.activeTab{
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 </style>
