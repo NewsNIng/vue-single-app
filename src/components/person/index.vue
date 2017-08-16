@@ -3,7 +3,7 @@
     <mu-card>
   
       <mu-card-media :title="userInfo.nickname" :subTitle="telPhone">
-        <img :src="_getRandomImgSrc()" @click='onAvatarClick' style="maxHeight: 300px;" />
+        <img :src="_getRandomImgSrc()" @click='onAvatarClick' style="maxHeight: 250px;filter: blur(4px);" />
       </mu-card-media>
   
     </mu-card>
