@@ -2,7 +2,7 @@
   <!-- <div> -->
   
   <div class="infinite-container" ref='room'>
-    <section class="activeTab">
+    <!-- <section class="activeTab">
       <mu-tabs :value="activeTab" @change="handleTabChange">
         <mu-tab title="全部" value="all">
         </mu-tab>
@@ -11,7 +11,7 @@
         <mu-tab title="精华" value="hot">
         </mu-tab>
       </mu-tabs>
-    </section>
+    </section> -->
     <mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh" />
     <template v-for='o,i of list'>
   
@@ -59,8 +59,6 @@ export default {
   mounted() {
     this.scroller = this.$el
     this.trigger = this.$el
-
-    this.loadMore()
   },
   computed: {
     // ...mapGetters({
@@ -139,6 +137,7 @@ export default {
   activated() {
     // 重置滚动条高度
     this._resetScrollTop()
+    this.refresh()
   },
   // 路由离开
   deactivated() {
@@ -158,12 +157,12 @@ export default {
   -webkit-overflow-scrolling: touch;
   position: relative;
   user-select: none;
-  margin-top: 48px;
+  /* margin-top: 48px; */
 }
 
-.activeTab{
+/* .activeTab{
   position: fixed;
   top: 0;
   width: 100%;
-}
+} */
 </style>

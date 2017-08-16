@@ -3,7 +3,7 @@
     <mu-card>
   
       <mu-card-media :title="userInfo.nickname" :subTitle="telPhone">
-        <img src="https://cdn.pixabay.com/photo/2017/04/13/17/48/floor-2228277__340.jpg" @click='onAvatarClick' />
+        <img :src="_getRandomImgSrc()" @click='onAvatarClick' style="maxHeight: 300px;" />
       </mu-card-media>
   
     </mu-card>
@@ -91,7 +91,10 @@ export default {
     // 头像点击
     onAvatarClick(){
       alert(123)
-    }
+    },
+    _getRandomImgSrc() {
+      return this.$itool.getRandomImgSrc()
+    },
   },
   watch: {
     // 监听主题皮肤
