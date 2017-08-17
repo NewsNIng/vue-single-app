@@ -3,7 +3,7 @@
     <mu-card>
   
       <mu-card-media :title="userInfo.nickname" :subTitle="telPhone">
-        <img :src="_getRandomImgSrc()" @click='onAvatarClick' style="maxHeight: 250px;filter: blur(4px);" />
+        <img :src="bgSrc" @click='onAvatarClick' style="maxHeight: 250px;filter: blur(4px);" />
       </mu-card-media>
   
     </mu-card>
@@ -15,11 +15,11 @@
       <mu-list-item title="换肤" @click='onThemeClick'>
         <mu-icon slot="left" value="remove_red_eye" />
       </mu-list-item>
-      <mu-list-item title="Sent mail">
-        <mu-icon slot="left" value="send" />
+      <mu-list-item title="代码地址" @click='onCodeAddressClick'>
+        <mu-icon slot="left" value="code" />
       </mu-list-item>
-      <mu-list-item title="Drafts">
-        <mu-icon slot="left" value="drafts" />
+      <mu-list-item title="关于作者" @click='onAbmeClick'>
+        <mu-icon slot="left" value="send" />
       </mu-list-item>
     </mu-list>
     <br/>
@@ -52,10 +52,11 @@ export default {
       // },
       // 主题皮肤下标
       themeIndex: -1,
+      bgSrc: null,
     }
   },
   mounted() {
-    
+    this.changeBgSrc()
   },
   computed: {
     ...mapGetters({
@@ -64,7 +65,7 @@ export default {
 
     // 隐藏真实手机号
     telPhone() {
-      if(!this.userInfo.telphone){return ''}
+      if (!this.userInfo.telphone) { return '' }
       let tel = this.userInfo.telphone.toString().split('')
       tel.splice(3, 4, '*', '*', '*', '*')
       return tel.join('')
@@ -75,6 +76,9 @@ export default {
     ...mapActions([
       'UserLogout'
     ]),
+    changeBgSrc() {
+      this.bgSrc = this._getRandomImgSrc()
+    },
     // 注销
     onLogout() {
       this.UserLogout()
@@ -85,12 +89,19 @@ export default {
       this.themeIndex++
     },
     // 修改资料
-    onInfoClick(){
+    onInfoClick() {
       this.$router.next('my')
     },
+    onCodeAddressClick(){
+      window.location.href = 'https://git.oschina.net/newsning/spa.git'
+    },
     // 头像点击
-    onAvatarClick(){
-      alert(123)
+    onAvatarClick() {
+      this.changeBgSrc()
+    },
+    // 关于作者
+    onAbmeClick() {
+      this.$router.next('abme')
     },
     _getRandomImgSrc() {
       return this.$itool.getRandomImgSrc()
