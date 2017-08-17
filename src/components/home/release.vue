@@ -1,6 +1,6 @@
 <template>
     <div>
-        <mu-appbar title="发布动态">
+        <mu-appbar title="发布留言">
             <mu-icon-button icon="arrow_back" slot="left" @click='onBackClick' />
             <mu-icon-button icon="send" slot="right" @click='onSend'/>
         </mu-appbar>

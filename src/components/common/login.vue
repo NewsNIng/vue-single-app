@@ -12,6 +12,9 @@
             </br>
             </br>
             <mu-raised-button label="登录" class="demo-raised-button" fullWidth primary @click='onClick' />
+            <br/>
+            <br/>
+            <mu-raised-button label="获取测试帐号" class="demo-raised-button" fullWidth primary @click='onTestClick' />
         </div>
         <mu-divider/>
         </br>
@@ -51,13 +54,17 @@ export default {
         goRegister() {
             this.$router.next('register')
         },
+        onTestClick(){
+            this.telphone = '17019951022'
+            this.password = 'newsning'
+        },
 
         async login() {
             try {
                 let rs = await this.$api.user.login(this.telphone, this.password)
 
                 // 保存 信息
-                let { token,userInfo } = rs.data
+                let { token, userInfo } = rs.data
                 console.log(rs.data)
                 this.updateToken(token)
                 this.UserLogin(userInfo)
@@ -65,12 +72,12 @@ export default {
                 //如果用户手动输入"/"那么会跳转到这里来，即this.$route.query.redirect有参数
                 let redirectUrl = decodeURIComponent(this.$route.query.redirect || '')
                 console.log(redirectUrl)
-                if(!redirectUrl){
+                if (!redirectUrl) {
                     this.$router.back()
-                }else{
+                } else {
                     this.$router.replace(redirectUrl)
                 }
-                
+
             } catch (e) {
                 alert(e.errmsg)
             }

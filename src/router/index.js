@@ -26,9 +26,14 @@ import Release from '@/components/home/release'
 // 详情
 import Detail from '@/components/home/detail'
 // 斗图
-// import Doutu from '@/components/doutu/index'
+import Doutu from '@/components/doutu/index'
 // 消息
 import Chat from '@/components/chat/index'
+
+
+// 关于我
+
+import Abme from '@/components/abme/index'
 
 
 Router.prototype.back = function () {
@@ -56,6 +61,12 @@ const router = new Router({
   routes: [
     {
       path: '*', redirect: '/main'
+    },
+    // 关于我
+    {
+      path: '/abme',
+      name: 'abme',
+      component: Abme
     },
     // 登录页面
     {
@@ -117,12 +128,12 @@ const router = new Router({
           requiresAuth: true
         }
       },
-      // {
-      //   // 斗图中心 
-      //   path: '/doutu',
-      //   name: 'doutu',
-      //   component: Doutu,
-      // },
+      {
+        // 斗图中心 
+        path: '/doutu',
+        name: 'doutu',
+        component: Doutu,
+      },
       {
         // 聊天 
         path: '/chat',
